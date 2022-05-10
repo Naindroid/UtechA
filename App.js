@@ -11,6 +11,8 @@ import ShDetails from './Screens/ShDetails';
 import PlaceOr from './Screens/PlaceOr';
 import Seller from './Screens/Seller';
 import SOrDet from './Screens/SOrDet';
+import BuyerOrders from './Screens/BuyerOrders';
+import createShop from './Screens/createShop';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +32,8 @@ export default function App() {
       <Stack.Screen name="PlaceOr" component={PlaceOr} />    
       <Stack.Screen name="Seller" component={Seller} />    
       <Stack.Screen name="SOrDet" component={SOrDet} />    
+      <Stack.Screen name="BuyerOrders" component={BuyerOrders} />    
+      <Stack.Screen name="createShop" component={createShop} />    
     </Stack.Navigator>
     
     }</NavigationContainer>

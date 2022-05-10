@@ -8,7 +8,7 @@ export default class ShDetails_screen extends Component {
     return (
       <Container >
         <Header style={{backgroundColor: 'ffffff'}}>
-            <Text style={{fontWeight: 'bold', fontSize: 27, marginTop: 10, color: '#52ab98'}}>Cutsomer Name</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 27, marginTop: 10, color: '#52ab98'}}>Customer Name</Text>
         </Header>
         <Content contentContainerStyle={styles.pview}>
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {StyleSheet} from 'react-native';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
 import { Container, Content, Button, Body, Text, Card, CardItem, Left, Right} from 'native-base';
-import { Agenda } from 'react-native-calendars';
 export default class Current_tab extends Component {
   render() {
     return (

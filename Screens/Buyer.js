@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import {StyleSheet} from 'react-native';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
-import { Container, Content, Card, Footer, FooterTab, Button, Icon, Text, Col, Row, Grid, CardItem } from 'native-base';
+import MtCicon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Container, Content, Card, Footer, FooterTab, Button, Icon, Text, Col, Row, Grid, CardItem, Fab, View } from 'native-base';
 export default class Buyer_screen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      active: false
+    };
+  }
   render() {
     return (
       <Container>
-        <Content padder style={{backgroundColor: '#ffffff'}}>
+        <View style={{ flex: 1 }}>
+        <Content padder style={{backgroundColor: '#ffffff'}}> 
         <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: 10, marginHorizontal: 15}}>Available Service Providers</Text>
         <Text note style={{fontSize: 17, marginBottom: 30, marginHorizontal: 15}}>Choose a category to see services near you</Text> 
           <Grid>
@@ -65,7 +73,7 @@ export default class Buyer_screen extends Component {
               </Row>
               <Row>
                 <Card style={{borderRadius:15}} transparent>
-                  <CardItem style={styles.boxview2} button onPress={()=> this.props.navigation.navigate("Map")}>
+                  <CardItem style={styles.boxview2} button onPress={()=> this.props.navigation.navigate("createShop")}>
                     <Mticon name="devices" size={50} color="#ffffff" />
                   </CardItem>  
                   <CardItem footer>
@@ -75,7 +83,26 @@ export default class Buyer_screen extends Component {
               </Row>
             </Col>
           </Grid>
+          <Fab
+            active={this.state.active}
+            direction="down"
+            containerStyle={{ }}
+            style={{ backgroundColor: '#52ab98'}}
+            position="topRight"
+            onPress={() => this.setState({ active: !this.state.active })}>
+            <MtCicon name="menu-down-outline" color="#ffffff" />
+            <Button style={{ backgroundColor: '#2b6777' }} onPress={()=> this.props.navigation.navigate("Buyer")}>
+              <MtCicon name="view-grid-outline" size={25} color="#ffffff" />
+            </Button>
+            <Button style={{ backgroundColor: '#c8d8e4' }} onPress={()=> this.props.navigation.navigate("BuyerOrders")}>
+              <MtCicon name="playlist-edit" size={25} color="#ffffff" />
+            </Button>
+            <Button style={{ backgroundColor: '#ff6961' }} onPress={()=> this.props.navigation.navigate("Login")}>
+              <MtCicon name="logout" size={25} color="#ffffff" />
+            </Button>
+          </Fab>
         </Content>
+        </View>
 
           {/* <Footer>
           <FooterTab style={{backgroundColor: '#2b6777'}}>

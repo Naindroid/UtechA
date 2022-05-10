@@ -9,7 +9,6 @@ export default class Mainmenu_screen extends Component {
     return (
       <Container>
         <Content padder style={{backgroundColor: '#ffffff'}}>
-          <Text>Git testing</Text>
         <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: 10, marginHorizontal: 15}}>Main Menu</Text>
         <Text note style={{fontSize: 17, marginBottom: 30, marginHorizontal: 15}}>Choose a category</Text> 
         
