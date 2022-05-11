@@ -1,12 +1,40 @@
-import React, { Component } from 'react';
-import {StyleSheet} from 'react-native';
+import React, { Component, useState } from 'react';
+import {StyleSheet, Image} from 'react-native';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
 import {firebase} from '@react-native-firebase/database';
+import ImagePicker from 'react-native-image-crop-picker';
 import { Container, Root, Toast, Content, Button, Left, Icon, Right, Text, Form, Item, Label, Input, Textarea, Card, CardItem} from 'native-base';
 
+const imgpath = 'https://i.vimeocdn.com/portrait/58832_300x300.jpg';
+
+
+const takePhoto = () => {
+
+  ImagePicker.openCamera({
+    width: 300,
+    height: 400,
+    cropping: true,
+  }).then(image => {
+    console.log(image.path);
+  });
+
+}
+
+const openGallery = () => {
+  ImagePicker.openPicker({
+  width: 300,
+    height: 400,
+    cropping: true
+  }).then(image => {
+    imgpath = image.path;
+    console.log(imgpath);
+
+  });
+}
 
 export default class PlaceOr_screen extends Component {
 
+  
   constructor(){
     super();
     this.state = ({
@@ -14,7 +42,9 @@ export default class PlaceOr_screen extends Component {
       address: '',
       details: '',
       contact: '',
-      orderArr: []
+      orderArr: [],
+
+      
     })
   }
 
@@ -49,6 +79,8 @@ export default class PlaceOr_screen extends Component {
       })
     })
   }
+
+  
 
   render() {
     return (
@@ -105,11 +137,20 @@ export default class PlaceOr_screen extends Component {
             
             <Text style={styles.text}>Attach Picture:</Text>
             <Right>
-              <Button bordered dark style={{marginTop: 15}}>
+              <Button bordered dark style={{marginTop: 15}} onPress={takePhoto}>
                 <Mticon button name="photo-camera" size={40} color='black' />
               </Button>
+              <Button bordered dark style={{marginTop: 15}} onPress={openGallery}>
+                <Mticon button name="image" size={40} color='black' />
+              </Button>
             </Right>
-              <Text note style={{textAlign: 'center'}}>Attach a picture related to your required work</Text>
+
+            <Card>
+              <CardItem bordered style={{height: 150, justifyContent:'center'}}>
+                <Image source={{uri: imgpath}} style={{height: 150, width: null, flex: 1}}/>
+              </CardItem>
+            </Card>
+              
 
           </Form>
 
