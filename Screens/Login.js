@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { Container, Root, Content, Button, Text, Form, Item, Input, Label, Toast} from 'native-base';
 export default class Login_screen extends Component {
@@ -65,7 +65,8 @@ export default class Login_screen extends Component {
       <Container >
         <Content contentContainerStyle={styles.pview}>
           
-          <Text style={{fontWeight: 'bold', textAlign:'center', fontSize:50, marginTop: 100, marginBottom:150, color: '#2b6777'}}>UtechA</Text>
+          <Image source={require('../assets/logo.png')} style={{height: 250, width: 250, alignSelf: 'center',}}/>
+          <Text style={{fontWeight: 'bold', textAlign:'center', fontSize:50, marginTop: -60, marginBottom:100, color: '#2b6777'}}>UTechA</Text>
           <Text style={{fontWeight: 'bold', textAlign:'center'}}>Sign in to continue</Text>
           <Form >
 
@@ -120,7 +121,7 @@ const styles=StyleSheet.create({
 
   btn:{
     alignSelf:'center',
-    marginTop:100,
+    marginTop:80,
     backgroundColor: '#52ab98',
   }
 })

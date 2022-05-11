@@ -3,10 +3,9 @@ import {StyleSheet, Image} from 'react-native';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
 import {firebase} from '@react-native-firebase/database';
 import ImagePicker from 'react-native-image-crop-picker';
-import { Container, Root, Toast, Content, Button, Left, Icon, Right, Text, Form, Item, Label, Input, Textarea, Card, CardItem} from 'native-base';
+import { Container, Root, Toast, Content, Button, Grid, Col, Row, Text, Form, Item, Label, Input, Textarea, Card, CardItem} from 'native-base';
 
-const imgpath = 'https://i.vimeocdn.com/portrait/58832_300x300.jpg';
-
+//const imgpath = '';
 
 const takePhoto = () => {
 
@@ -15,7 +14,18 @@ const takePhoto = () => {
     height: 400,
     cropping: true,
   }).then(image => {
-    console.log(image.path);
+    //imgpath = image.path;
+    //console.log(imgpath);
+
+    PlaceOr_screen.imgpath = image.path;
+    console.log(PlaceOr_screen.imgpath);
+
+    return(PlaceOr_screen.imgpath)
+
+    // PlaceOr_screen.state.setState({
+    //   imgpath: image.path,
+    // })
+    // console.log(PlaceOr_screen.imgpath);
   });
 
 }
@@ -26,15 +36,21 @@ const openGallery = () => {
     height: 400,
     cropping: true
   }).then(image => {
-    imgpath = image.path;
-    console.log(imgpath);
+    
+    // imgpath = image.path;
+    // console.log(imgpath);
 
+    PlaceOr_screen.imgpath = image.path;
+    console.log(PlaceOr_screen.imgpath);
+
+    return(PlaceOr_screen.imgpath)
   });
 }
 
 export default class PlaceOr_screen extends Component {
 
   
+
   constructor(){
     super();
     this.state = ({
@@ -44,7 +60,7 @@ export default class PlaceOr_screen extends Component {
       contact: '',
       orderArr: [],
 
-      
+      imgpath: ''
     })
   }
 
@@ -88,8 +104,8 @@ export default class PlaceOr_screen extends Component {
       <Container >
         <Content contentContainerStyle={styles.pview}>
           
-        <Text style={{fontWeight: 'bold', fontSize: 27, marginTop: 10}}>Order Placement</Text> 
-        <Text style={{fontWeight: 'bold',fontSize: 24, marginTop: 5, marginBottom: 25, color: '#52ab98'}}>ZAB Waterworks</Text>
+        <Text style={{fontWeight: 'bold', fontSize: 27, marginTop: 10, color: '#52ab98'}}>Order Placement</Text> 
+        {/* <Text style={{fontWeight: 'bold',fontSize: 24, marginTop: 5, marginBottom: 25, color: '#52ab98'}}>ZAB Waterworks</Text> */}
           <Form >
 
             
@@ -136,18 +152,27 @@ export default class PlaceOr_screen extends Component {
             />
             
             <Text style={styles.text}>Attach Picture:</Text>
-            <Right>
-              <Button bordered dark style={{marginTop: 15}} onPress={takePhoto}>
-                <Mticon button name="photo-camera" size={40} color='black' />
+            <Grid>
+              <Col>
+                <Row style={{justifyContent: 'center', alignItems: 'center'}}>
+            
+              <Button bordered dark style={{marginTop: 15, marginHorizontal: 20}} onPress={takePhoto}>
+                <Mticon button name="photo-camera" size={40} color='#52ab98' />
               </Button>
-              <Button bordered dark style={{marginTop: 15}} onPress={openGallery}>
-                <Mticon button name="image" size={40} color='black' />
+            
+            
+              <Button bordered dark style={{marginTop: 15, marginHorizontal: 20}} onPress={openGallery}>
+                <Mticon button name="image" size={40} color='#52ab98' />
               </Button>
-            </Right>
+                  </Row>
+                </Col>
+              </Grid>
+            
+            
 
             <Card>
               <CardItem bordered style={{height: 150, justifyContent:'center'}}>
-                <Image source={{uri: imgpath}} style={{height: 150, width: null, flex: 1}}/>
+                <Image source={{uri: this.state.imgpath}} style={{height: 150, width: null, flex: 1}}/>
               </CardItem>
             </Card>
               

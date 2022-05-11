@@ -35,7 +35,7 @@ export default class ShDetails_screen extends Component {
 
             <Button rounded block style={{marginTop:80, backgroundColor: '#2b6777'}}
             onPress={()=> 
-              RNImmediatePhoneCall.immediatePhoneCall('03313799814')
+              RNImmediatePhoneCall.immediatePhoneCall('03368282060')
               }>
                 <Mticon name='phone' size={23} color='#ffffff'/>
                 <Text>Contact</Text>

@@ -38,7 +38,7 @@ export default class Map_screen extends Component {
     return (
       
           <Card style={{borderRadius: 15, padding: 10}}>
-            <CardItem button onPress={()=> this.props.navigation.navigate("ShDetails")}>
+            <CardItem button onPress={()=> this.props.navigation.navigate("PlaceOr")}>
               <Left>
                 <Text style={{fontSize: 17, fontWeight: 'bold', color: '#52ab98'}}>{item.shopName}</Text>
               </Left>
