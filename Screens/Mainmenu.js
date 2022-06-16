@@ -3,8 +3,18 @@ import {StyleSheet} from 'react-native';
 import FAicon from 'react-native-vector-icons/FontAwesome';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
 import MtCicon from 'react-native-vector-icons/MaterialCommunityIcons';
+import auth from '@react-native-firebase/auth';
+import { firebase } from '@react-native-firebase/database';
 import { Container, Content, Card, Footer, FooterTab, Button, Icon, Text, Col, Row, Grid, CardItem } from 'native-base';
 export default class Mainmenu_screen extends Component {
+
+componentDidMount(){
+  firebase.auth().onAuthStateChanged(user => {  if(user) {
+    console.log(user.uid);    
+    console.log(user.email)   
+  }})
+}
+  
   render() {
     return (
       <Container>
