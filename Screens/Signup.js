@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {firebase} from '@react-native-firebase/database';
 import { Container, Root, Toast, Content, Button, Text, Form, Item, Input, Label } from 'native-base';
-
+ //changes
 
 export default class Signup_screen extends Component {
 
@@ -17,11 +17,12 @@ constructor(){
     userArr: [],
 
     cpassword: '',
+    uid: '',
   })
 }
 
 componentDidMount(){
-  const myitems = firebase.database().ref('Users');
+  const myitems = firebase.database().ref('users/');
   myitems.on('value', datasnap => {
     if(datasnap.val()){
       this.setState({userArr: Object.values(datasnap.val()) })
@@ -30,19 +31,26 @@ componentDidMount(){
 }
 
 inputValueUpdate=(val, prop) => {
+  auth().onAuthStateChanged(user => {  if(user) {
+    this.state.uid = user.uid
+  }})
   const state = this.state;
   state[prop] = val;
   this.setState(state);
+  console.log("Entry:",this.state)
 }
 
-storeitem(){
-  const users = firebase.database().ref('Users');
-  users.push().set({
+storeitem(userdata){
+  console.log("userd data",userdata)
+  const users = firebase.database().ref('users/'+ userdata.user.uid);
+  users.set({
     email:this.state.email,
     password:this.state.password,
     name:this.state.name,
     contact:this.state.contact,
+    uid:userdata.user.uid,
   }).then((res) =>{
+    console.log("Line 59:",res)
     this.setState({
       email: '',
       password: '',
@@ -54,7 +62,7 @@ storeitem(){
   })
 }
 
-  signup=(email, password)=>{
+  async signup(email, password){
     if(this.state.email==='' || this.state.password==='' || this.state.name==='' || this.state.contact===''){
       Toast.show({
         text: "Please fill all fields",
@@ -74,9 +82,10 @@ storeitem(){
       })
     }
     else{
-      auth().createUserWithEmailAndPassword(email, password)
-     .then(() => {
-      this.storeitem();
+     await  auth().createUserWithEmailAndPassword(email, password)
+     .then((userdata) => {
+      console.log("Line 90:", JSON.stringify(userdata.user.uid))
+      this.storeitem(userdata);
       Toast.show({
         text: "Account created successfully!",
         buttonText: "Okay",
