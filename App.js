@@ -31,7 +31,7 @@ export default function App() {
       <Stack.Screen name="ShDetails" component={ShDetails} />    
       <Stack.Screen name="PlaceOr" component={PlaceOr} />    
       <Stack.Screen name="Seller" component={Seller} />    
-      <Stack.Screen name="SOrDet" component={SOrDet} />    
+      <Stack.Screen name="SOrDet" component={SOrDet}/>  
       <Stack.Screen name="BuyerOrders" component={BuyerOrders} />    
       <Stack.Screen name="createShop" component={createShop} />    
     </Stack.Navigator>

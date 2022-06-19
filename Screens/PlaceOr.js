@@ -2,49 +2,35 @@ import React, { Component, useState } from 'react';
 import {StyleSheet, Image} from 'react-native';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
 import {firebase} from '@react-native-firebase/database';
-import ImagePicker from 'react-native-image-crop-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage'
 import { Container, Root, Toast, Content, Button, Grid, Col, Row, Text, Form, Item, Label, Input, Textarea, Card, CardItem} from 'native-base';
 
-//const imgpath = '';
-
-const takePhoto = () => {
-
-  ImagePicker.openCamera({
-    width: 300,
-    height: 400,
-    cropping: true,
-  }).then(image => {
-    //imgpath = image.path;
-    //console.log(imgpath);
-
-    PlaceOr_screen.imgpath = image.path;
-    console.log(PlaceOr_screen.imgpath);
-
-    return(PlaceOr_screen.imgpath)
-
-    // PlaceOr_screen.state.setState({
-    //   imgpath: image.path,
-    // })
-    // console.log(PlaceOr_screen.imgpath);
-  });
-
-}
-
-const openGallery = () => {
-  ImagePicker.openPicker({
-  width: 300,
-    height: 400,
-    cropping: true
-  }).then(image => {
+pickAndUploadImage=()=>{
+  launchImageLibrary({quality:0.5},(fileobj)=>{
     
-    // imgpath = image.path;
-    // console.log(imgpath);
+    
+    const uploadTask = storage().ref().child(`/orderpic/${Date.now()}`).putFile(fileobj.assets[0].uri)
 
-    PlaceOr_screen.imgpath = image.path;
-    console.log(PlaceOr_screen.imgpath);
-
-    return(PlaceOr_screen.imgpath)
-  });
+    uploadTask.on('state_changed', 
+      (snapshot) => {
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    if(progress==100) alert('Image Has Been Uploaded Successfully')
+    
+  }, 
+  (error) => {
+    alert('Error While Uploading Image')
+  }, 
+  () => {
+    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      console.log('File available at', downloadURL);
+      setImage(downloadURL);
+      this.state.imgpath = fileobj.assets[0].uri;
+      console.log(imgpath);
+    });
+  }
+);
+  })
 }
 
 export default class PlaceOr_screen extends Component {
@@ -156,12 +142,10 @@ export default class PlaceOr_screen extends Component {
               <Col>
                 <Row style={{justifyContent: 'center', alignItems: 'center'}}>
             
-              <Button bordered dark style={{marginTop: 15, marginHorizontal: 20}} onPress={takePhoto}>
-                <Mticon button name="photo-camera" size={40} color='#52ab98' />
-              </Button>
             
             
-              <Button bordered dark style={{marginTop: 15, marginHorizontal: 20}} onPress={openGallery}>
+            
+              <Button bordered dark style={{marginTop: 15, marginHorizontal: 20}} onPress={pickAndUploadImage}>
                 <Mticon button name="image" size={40} color='#52ab98' />
               </Button>
                   </Row>

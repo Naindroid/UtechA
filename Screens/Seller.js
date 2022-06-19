@@ -12,7 +12,7 @@ export default class Seller_screen extends Component {
         <Header hasTabs style={{backgroundColor: '#ffffff'}}>
             <Text style={{fontWeight: 'bold', fontSize: 30, padding: 5}}>My Orders</Text>
         </Header>
-        <Tabs initialPage={1}>
+        <Tabs initialPage={0}>
           <Tab heading="Pending" tabStyle={styles.tab} activeTabStyle={styles.tab2}>
             <Pending_tab navigation={this.props.navigation}/>
           </Tab>

@@ -61,7 +61,7 @@ export default class Map_screen extends Component {
               longitude: long,
             }}
             title={item.shopName}
-            description="For your 100 plumbing needs"
+            description="Plumbing Service"
           />
                   
       )

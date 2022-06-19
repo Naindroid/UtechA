@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
 import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import { firebase } from '@react-native-firebase/database';
-import { Container, Content, Accordion, Button, Body, Text, Card, CardItem, Left, Right, ListItem, List} from 'native-base';
+import { Container, Content, Input, Accordion, Button, Body, Text, Card, CardItem, Left, Right, ListItem, List} from 'native-base';
 
 
 
@@ -16,12 +16,15 @@ export default class Pending_tab extends Component {
       address: '',
       details: '',
       contact: '',
-      orderArr: []
+      orderArr: [],
+
+      offer: '',
 
     })
   }
   
   componentDidMount(){
+    this.forceUpdate()
     const myitems = firebase.database().ref('Orders');
     myitems.on('value', datasnap => {
       if(datasnap.val()){
@@ -36,7 +39,7 @@ export default class Pending_tab extends Component {
     const myitems = this.state.orderArr.map(item => {
       return(
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('SOrDet')}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('SOrDet', {item})}>
             <Card style={styles.order}>
               <CardItem header>
                 <Left>
