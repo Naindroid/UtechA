@@ -22,6 +22,7 @@ export default class Pending_tab extends Component {
   }
   
   componentDidMount(){
+    this.forceUpdate();
     const myitems = firebase.database().ref('Orders');
     myitems.on('value', datasnap => {
       if(datasnap.val()){
@@ -36,7 +37,7 @@ export default class Pending_tab extends Component {
     const myitems = this.state.orderArr.map(item => {
       return(
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('SOrDet')}>
+          <TouchableOpacity>
             <Card style={styles.order}>
               <CardItem header>
                 <Left>
