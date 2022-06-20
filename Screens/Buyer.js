@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet} from 'react-native';
 import Mticon from 'react-native-vector-icons/MaterialIcons';
 import MtCicon from 'react-native-vector-icons/MaterialCommunityIcons';
+import auth from '@react-native-firebase/auth';
 import { Container, Content, Card, Footer, FooterTab, Button, Icon, Text, Col, Row, Grid, CardItem, Fab, View } from 'native-base';
 export default class Buyer_screen extends Component {
   constructor(props) {
@@ -97,7 +98,11 @@ export default class Buyer_screen extends Component {
             <Button style={{ backgroundColor: '#c8d8e4' }} onPress={()=> this.props.navigation.navigate("BuyerOrders")}>
               <MtCicon name="playlist-edit" size={25} color="#ffffff" />
             </Button>
-            <Button style={{ backgroundColor: '#ff6961' }} onPress={()=> this.props.navigation.navigate("Login")}>
+            <Button style={{ backgroundColor: '#ff6961' }} onPress=
+              {()=> auth().signOut()
+                .then(() => { this.props.navigation.navigate("Login");
+              })}
+            >
               <MtCicon name="logout" size={25} color="#ffffff" />
             </Button>
           </Fab>
