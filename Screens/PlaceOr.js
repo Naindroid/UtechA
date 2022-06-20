@@ -141,26 +141,12 @@ export default class PlaceOr_screen extends Component {
             <Grid>
               <Col>
                 <Row style={{justifyContent: 'center', alignItems: 'center'}}>
-            
-            
-            
-            
               <Button bordered dark style={{marginTop: 15, marginHorizontal: 20}} onPress={pickAndUploadImage}>
                 <Mticon button name="image" size={40} color='#52ab98' />
               </Button>
                   </Row>
                 </Col>
               </Grid>
-            
-            
-
-            <Card>
-              <CardItem bordered style={{height: 150, justifyContent:'center'}}>
-                <Image source={{uri: this.state.imgpath}} style={{height: 150, width: null, flex: 1}}/>
-              </CardItem>
-            </Card>
-              
-
           </Form>
 
           <Button rounded block style={styles.btn} onPress={()=> {

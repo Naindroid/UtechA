@@ -18,8 +18,11 @@ export default class Completed_tab extends Component {
       contact: '',
       details: '',
       orderArr: [],
-
       
+      numofratings: 5,
+      rating: 2.3,
+      newrating: 5,
+
 
     })
   }
@@ -56,6 +59,12 @@ deletedata(){
     this.props.navigation.navigate("Seller")
     this.forceUpdate()
   })
+}
+
+rating(){
+  this.state.numofratings = this.state.numofratings + 1
+  var rating = (this.state.rating + this.state.newrating)/this.state.numofratings
+  console.log(rating)
 }
 
   render() {
@@ -98,7 +107,7 @@ deletedata(){
                 <Right>
                   <Mticon.Button name="stars" size={25} color='#ffffff' backgroundColor='#2b6777' 
                     onPress={()=> 
-                      this.storeitem(item)}>
+                      this.props.navigation.navigate('Rating', {item})}>
                   <Text style={{color: '#ffffff'}}>Rate</Text>
                   </Mticon.Button>
                 </Right>
